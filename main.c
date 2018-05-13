@@ -3,16 +3,26 @@
 #fuses HS, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT
 #fuses NOPBADEN, NOMCLR, STVREN, NOLVP, NODEBUG
 #use delay(clock=16000000)
-#use RS232(BAUD=9600,XMIT=PIN_C6,rcv=PIN_C7,BITS=8,PARITY=N,STOP=1)
 
+#use fast_io(a)
+#use fast_io(b)
+#use fast_io(c)
+#use fast_io(d)
+#use fast_io(e)
 
-long resultado = 0x00, resultado2=0x00;
+long resultado = 0x00;
+int flag_AD = 0x00;
+
+#int_ad
+void ISR_AD(){
+   resultado = read_adc(ADC_READ_ONLY);
+   read_adc(ADC_START_ONLY);
+}
 
 void main (void){
    setup_oscillator(OSC_16MHZ);
    setup_adc(ADC_CLOCK_DIV_32);
    setup_adc_ports(AN0_TO_AN1);  
-   
    enable_interrupts(INT_AD);
    enable_interrupts(GLOBAL);
    
@@ -27,17 +37,21 @@ void main (void){
    output_b(0x00);
    output_d(0x00);
    
-   while(1){
+   
+   while(1){ 
       set_adc_channel(0);
-      delay_us(20);
-      resultado = read_adc();
+      delay_ms(1);
+      read_adc(ADC_START_ONLY);
       output_b(resultado);
-      output_d(resultado>>8);
+      output_d(resultado >> 8);
       delay_us(10);
+      
       set_adc_channel(1);
-      delay_us(20);
-      resultado2=read_adc();
-      output_c(resultado2);
-      output_e(resultado2>>8);
+      delay_ms(1);
+      read_adc(ADC_START_ONLY);
+      output_c(resultado);
+      output_e(resultado >> 8);
+      delay_us(10);
    }
 }
+
