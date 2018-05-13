@@ -9,7 +9,12 @@ long resultado = 0x00;
 void main (void){
    setup_oscillator(OSC_16MHZ);
    setup_adc(ADC_CLOCK_DIV_32);
-   setup_adc_ports(AN0_TO_AN1);  
+   setup_adc_ports(AN0_TO_AN1);
+   set_tris_a(0x03);
+   set_tris_b(0x00);
+   set_tris_d(0x00);
+   output_b(0x00);
+   output_d(0x00);
    while(1){
       set_adc_channel(0);
       delay_us(20);
