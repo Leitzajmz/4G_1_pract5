@@ -13,6 +13,9 @@ void main (void){
    setup_adc(ADC_CLOCK_DIV_32);
    setup_adc_ports(AN0_TO_AN1);  
    
+   enable_interrupts(INT_AD);
+   enable_interrupts(GLOBAL);
+   
    set_tris_a(0b00000011);
    set_tris_b(0x00);
    set_tris_c(0x00);
