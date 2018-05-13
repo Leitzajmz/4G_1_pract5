@@ -11,7 +11,7 @@ void main (void){
    setup_adc(ADC_CLOCK_DIV_32);
    setup_adc_ports(AN0_TO_AN1);  
    while(1){
-      
+
    }
 }
 
