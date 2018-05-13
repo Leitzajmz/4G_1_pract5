@@ -11,7 +11,6 @@
 #use fast_io(e)
 
 long resultado = 0x00;
-int flag_AD = 0x00;
 
 #int_ad
 void ISR_AD(){
@@ -26,7 +25,7 @@ void main (void){
    enable_interrupts(INT_AD);
    enable_interrupts(GLOBAL);
    
-   set_tris_a(0b00000011);
+   set_tris_a(0x03);
    set_tris_b(0x00);
    set_tris_c(0x00);
    set_tris_e(0x00);
