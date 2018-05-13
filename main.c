@@ -20,7 +20,7 @@ void ISR_AD(){
 
 void main (void){
    setup_oscillator(OSC_16MHZ);
-   setup_adc(ADC_CLOCK_DIV_32);
+   setup_adc(ADC_CLOCK_INTERNAL);
    setup_adc_ports(AN0_TO_AN1);  
    enable_interrupts(INT_AD);
    enable_interrupts(GLOBAL);
