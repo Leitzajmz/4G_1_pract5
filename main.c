@@ -10,6 +10,9 @@
 #use fast_io(d)
 #use fast_io(e)
 
+void configuracionDePuertos();
+void inicializarPuertos();
+
 long resultado = 0x00;
 
 #int_ad
@@ -25,17 +28,8 @@ void main (void){
    enable_interrupts(INT_AD);
    enable_interrupts(GLOBAL);
    
-   set_tris_a(0x03);
-   set_tris_b(0x00);
-   set_tris_c(0x00);
-   set_tris_e(0x00);
-   set_tris_d(0x00);
-   
-   output_c(0x00);
-   output_e(0x00);
-   output_b(0x00);
-   output_d(0x00);
-   
+   configuracionDePuertos();
+   inicializarPuertos();
    
    while(1){ 
       set_adc_channel(0);
@@ -52,5 +46,23 @@ void main (void){
       output_e(resultado >> 8);
       delay_us(10);
    }
+}
+
+/*FUNCIONES*/
+
+
+void configuracionDePuertos(){
+   set_tris_a(0x03);
+   set_tris_b(0x00);
+   set_tris_c(0x00);
+   set_tris_e(0x00);
+   set_tris_d(0x00);
+}
+
+void inicializarPuertos(){
+   output_c(0x00);
+   output_e(0x00);
+   output_b(0x00);
+   output_d(0x00);
 }
 
